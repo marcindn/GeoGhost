@@ -1,0 +1,56 @@
+{
+  "manifest_version": 3,
+  "name": "GeoGhost",
+  "version": "4.1",
+  "description": "Advanced browser fingerprint spoofer with global profiles",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "96": "assets/icons/icon96.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "privacy",
+    "cookies",
+    "proxy"
+  ],
+  "host_permissions": ["*://*/*"],
+  "action": {
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    },
+    "default_popup": "pages/popup.html",
+    "default_title": "GeoGhost"
+  },
+  "background": {
+    "scripts": ["scripts/background.js"],
+    "type": "module",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "scripts/profiles.js",
+        "scripts/content.js" 
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/icons/icon48.png",
+        "assets/flags/*.svg",
+        "docs/PRIVACY.md"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
